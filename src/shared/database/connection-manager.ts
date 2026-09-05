@@ -1,5 +1,4 @@
-import { Prisma } from "../../generated/prisma/client";
-import { PrismaClient } from "../../generated/prisma/internal/class";
+import { Prisma, PrismaClient } from "../../generated/prisma/client";
 import { ShardId } from "../types/shared-types";
 import { getPrismaClient } from "./prisma-client";
 
