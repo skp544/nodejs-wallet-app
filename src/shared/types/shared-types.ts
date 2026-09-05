@@ -1,6 +1,8 @@
 import type { LedgerType } from "../../generated/prisma/enums";
+import { TransactionStatus } from "../../generated/prisma/enums";
 
 export type { LedgerType };
+export { TransactionStatus };
 
 export enum ShardId {
   SHARD_1 = 1,
@@ -22,5 +24,15 @@ export interface LedgerEntry {
   transaction_id: bigint;
   amount: bigint;
   type: LedgerType;
+  created_at: Date;
+}
+
+export interface Transaction {
+  id: bigint;
+  from_user: bigint;
+  to_user: bigint;
+  amount: bigint;
+  status: TransactionStatus;
+  idempotency_key: string;
   created_at: Date;
 }
