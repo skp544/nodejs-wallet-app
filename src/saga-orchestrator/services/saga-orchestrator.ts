@@ -11,6 +11,7 @@ import {
 } from "../steps/update-status.step";
 import { SagaContext } from "../types/saga-context";
 import { SagaStep } from "../types/saga-steps";
+import { Transaction } from "../../shared/types/shared-types";
 
 export class SagaOrchestrator {
   private transactionService: TransactionService;
@@ -39,7 +40,7 @@ export class SagaOrchestrator {
     toUser: bigint,
     amount: bigint,
     idempotencyKey: string,
-  ): Promise<any> {
+  ): Promise<Transaction> {
     if (amount <= 0) {
       throw new Error("Amount must be greater than 0");
     }
@@ -83,6 +84,7 @@ export class SagaOrchestrator {
 
           if (status === TransactionStatus.DEBITED) {
             if (i < 3) {
+              completedSteps.push(step);
               continue;
             }
           }

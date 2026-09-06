@@ -3,8 +3,8 @@ import { Transaction, TransactionStatus } from "../types/shared-types";
 
 export class TransactionRepository {
   async create(
-    toUser: bigint,
     fromUser: bigint,
+    toUser: bigint,
     amount: bigint,
     idempotencyKey: string,
     tx: Prisma.TransactionClient,

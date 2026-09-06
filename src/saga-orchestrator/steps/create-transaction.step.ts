@@ -50,7 +50,7 @@ export class CreateTransactionStep implements SagaStep {
     return context;
   }
 
-  async compensate(context: SagaContext): Promise<void> {
+  async compensate(_context: SagaContext): Promise<void> {
     // not compensation need for creating a transaction record
     // transaction can be marked as FAILED by the orchestrator
     // this step is idempotent -> creating a transaction record doesn't change the state of the system

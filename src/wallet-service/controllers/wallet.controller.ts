@@ -5,6 +5,7 @@ import {
   CreateWalletDTO,
   WalletResponseDTO,
 } from "../../shared/dtos/wallet.dto";
+import { tryParseBigInt as tryParseBigIntPathSegment } from "../../shared/utils/http-params";
 
 /**
  * Responsibilities
@@ -16,26 +17,6 @@ import {
  * 6. return correct status code
  *
  */
-
-// safe parser for a url path parameter that's supposed to be a number (/:userid) but stored as a bigint in the code
-function tryParseBigIntPathSegment(raw: string | undefined):
-  | {
-      ok: true;
-      value: bigint;
-    }
-  | {
-      ok: false;
-    } {
-  if (raw === undefined || raw === null || raw === "") {
-    return { ok: false };
-  }
-  try {
-    const result = BigInt(raw);
-    return { ok: true, value: result };
-  } catch (err: any) {
-    return { ok: false };
-  }
-}
 
 export class WalletController {
   private walletService: WalletService;
@@ -184,7 +165,7 @@ export class WalletController {
       if (msg.includes("Insufficient Funds")) {
         res.status(400).json({ success: false, error: msg });
         return;
-      } else if (msg.includes("wallet not found")) {
+      } else if (msg.toLowerCase().includes("wallet not found")) {
         res.status(404).json({ success: false, error: msg });
         return;
       }

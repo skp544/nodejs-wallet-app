@@ -63,18 +63,7 @@ export class DebitSenderStep implements SagaStep {
       return;
     }
 
-    // check if debit was committed
-    // fromQueryRunner is treated as a live DB transaction client
-    // if the debit ran inside a transaction, and it has been committed yet, you credit back manually
-    // you $rollback so the debit never becomes durable
-    // then clear fromQueryRunner  so nothing tries to use it again
-
-    if (!context.fromQueryRunner) {
-      await (context.fromQueryRunner as any).$rollback();
-      context.fromQueryRunner = undefined;
-      return;
-    }
-
+    // if the debit was committed, credit the sender back
     if (context.debitCommitted) {
       await connectionManager.executeInTransaction(
         context.fromShardId,

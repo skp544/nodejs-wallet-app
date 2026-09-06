@@ -72,7 +72,7 @@ export class UpdateStatusCreditedStep implements SagaStep {
     const updatedTransaction = await this.transactionService.updateStatus(
       context.transaction.id,
       TransactionStatus.CREDITED,
-      context.toUser,
+      context.fromUser,
     );
 
     context.transaction = updatedTransaction;
