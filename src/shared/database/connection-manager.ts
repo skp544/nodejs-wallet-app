@@ -4,11 +4,11 @@ import { getPrismaClient } from "./prisma-client";
 
 export class ConnectionManager {
   // get prisma client for a specific shard (For transactional operations)
-  static getClient(shardId: ShardId): PrismaClient {
+  getClient(shardId: ShardId): PrismaClient {
     return getPrismaClient(shardId);
   }
 
-  async executeTransaction<T>(
+  async executeInTransaction<T>(
     shardId: ShardId,
     fn: (tx: Prisma.TransactionClient) => Promise<T>,
   ): Promise<T> {

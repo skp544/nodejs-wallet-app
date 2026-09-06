@@ -1,8 +1,6 @@
-import type { LedgerType } from "../../generated/prisma/enums";
-import { TransactionStatus } from "../../generated/prisma/enums";
+import { LedgerType, TransactionStatus } from "../../generated/prisma/enums";
 
-export type { LedgerType };
-export { TransactionStatus };
+export { LedgerType, TransactionStatus };
 
 export enum ShardId {
   SHARD_1 = 1,
