@@ -1,8 +1,13 @@
+import fs from "node:fs";
 import path from "node:path";
 import winston from "winston";
 
 const isProduction = process.env.NODE_ENV === "production";
 const logDir = process.env.LOG_DIR ?? "logs";
+
+if (isProduction) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
 
 const levels = {
   error: 0,

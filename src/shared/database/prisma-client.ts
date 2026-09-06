@@ -17,6 +17,7 @@ function getShard1AdaptionOption() {
       return {
         host: u.hostname,
         port: parseInt(u.port || "3306", 10),
+        user: u.username,
         password: u.password,
         database: u.pathname.replace(/^\//, "") || "wallet_shard1",
         connectionLimit: 5,
@@ -29,6 +30,7 @@ function getShard1AdaptionOption() {
   return {
     host: process.env.DB_SHARD1_HOST || "localhost",
     port: parseInt(process.env.DB_SHARD1_PORT || "3306", 10),
+    user: process.env.DB_SHARD1_USER,
     password: process.env.DB_SHARD1_PASSWORD,
     database: process.env.DB_SHARD1_DATABASE || "wallet_shard1",
     connectionLimit: 5,
@@ -45,6 +47,7 @@ function getShard2AdaptionOption() {
       return {
         host: u.hostname,
         port: parseInt(u.port || "3306", 10),
+        user: u.username,
         password: u.password,
         database: u.pathname.replace(/^\//, "") || "wallet_shard2",
         connectionLimit: 5,
@@ -57,6 +60,7 @@ function getShard2AdaptionOption() {
   return {
     host: process.env.DB_SHARD2_HOST || "localhost",
     port: parseInt(process.env.DB_SHARD2_PORT || "3306", 10),
+    user: process.env.DB_SHARD2_USER,
     password: process.env.DB_SHARD2_PASSWORD,
     database: process.env.DB_SHARD2_DATABASE || "wallet_shard2",
     connectionLimit: 5,
