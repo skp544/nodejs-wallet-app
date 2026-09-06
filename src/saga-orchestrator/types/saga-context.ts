@@ -6,7 +6,7 @@ import { Transaction, ShardId } from "../../shared/types/shared-types";
 type PrismaTransactionClient = any;
 
 export interface SagaContext {
-  transaction: Transaction;
+  transaction?: Transaction;
   fromShardId: ShardId;
   toShardId: ShardId;
   fromUser: bigint;

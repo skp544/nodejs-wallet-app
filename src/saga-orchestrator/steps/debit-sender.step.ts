@@ -42,7 +42,7 @@ export class DebitSenderStep implements SagaStep {
       async (tx) => {
         const debitWallet = await this.walletService.debit(
           context.fromUser,
-          context.transaction.amount,
+          context.transaction!.amount,
           context.transaction!.id,
           tx,
         );
@@ -81,7 +81,7 @@ export class DebitSenderStep implements SagaStep {
         async (tx) => {
           await this.walletService.credit(
             context.fromUser,
-            context.transaction.amount,
+            context.transaction!.amount,
             context.transaction!.id,
             tx,
           );
