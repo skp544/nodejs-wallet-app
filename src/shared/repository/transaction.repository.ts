@@ -63,7 +63,6 @@ export class TransactionRepository {
     userId: bigint,
     client1: PrismaClient,
     client2: PrismaClient,
-    tx: PrismaClient | Prisma.TransactionClient,
   ): Promise<Transaction[]> {
     const [transactions1, transactions2] = await Promise.all([
       client1.transaction.findMany({
